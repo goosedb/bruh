@@ -109,34 +109,34 @@ module Bruh
 
 import GHC.Stack (HasCallStack, CallStack, callStack)
 import Control.Exception (Exception, throw)
-import qualified Data.Maybe as Maybe
-import qualified Data.Either as Either
-import qualified Data.Functor as Functor
-import qualified Data.List as List
-import qualified Data.Tuple as Tuple
-import qualified Data.Foldable as Foldable
-import qualified Data.String as String
-import qualified Data.Char as Char
-import qualified GHC.Show as Show
-import qualified Data.Eq as Eq
-import qualified Data.Ord as Ord
-import qualified GHC.Enum as Enum
-import qualified GHC.Int as Int
-import qualified GHC.Num as Num
-import qualified GHC.Real as Real
-import qualified GHC.Read as Read 
-import qualified Text.Read as Read
-import qualified Data.Semigroup as Semigroup
-import qualified System.IO as IO
-import qualified Data.Monoid as Monoid
-import qualified Control.Applicative as Applicative
-import qualified Data.Bifunctor as Bifunctor
-import qualified Data.Traversable as Traversable
-import qualified Control.Monad as Monad
+import Data.Maybe as Maybe
+import Data.Either as Either
+import Data.Functor as Functor
+import Data.List as List
+import Data.Tuple as Tuple
+import Data.Foldable as Foldable
+import Data.String as String
+import Data.Char as Char
+import GHC.Show as Show
+import Data.Eq as Eq
+import Data.Ord as Ord
+import GHC.Enum as Enum
+import GHC.Int as Int
+import GHC.Num as Num
+import GHC.Real as Real
+import GHC.Read as Read 
+import Text.Read as Read
+import Data.Semigroup as Semigroup
+import System.IO as IO
+import Data.Monoid as Monoid
+import Control.Applicative as Applicative
+import Data.Bifunctor as Bifunctor
+import Data.Traversable as Traversable
+import Control.Monad as Monad
 
-import qualified Data.Function as Function
+import Data.Function as Function
 import Control.DeepSeq (($!!), NFData)
-import qualified Data.Bool as Bool
+import Data.Bool as Bool
 import GHC.OldList (genericLength)
 
 newtype Bruh = Bruh CallStack
