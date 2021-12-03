@@ -103,6 +103,7 @@ module Bruh
   , IO.print
   , IO.getLine
   , IO.getChar 
+  , IO.IO
 
   ) where
 
