@@ -220,14 +220,14 @@ length :: Num b => [a] -> b
 length = genericLength
 
 class SuperComposition a b c | a b -> c where
-    (...) :: a -> b -> c
+  (...) :: a -> b -> c
 
 infixl 8 ...
 
 instance {-# INCOHERENT #-} (a ~ c, r ~ b) => SuperComposition (a -> b) c r where
-    f ... g = f g
-    {-# INLINE (...) #-}
+  f ... g = f g
+  {-# INLINE (...) #-}
 
 instance {-# INCOHERENT #-} (SuperComposition (a -> b) d r1, r ~ (c -> r1)) => SuperComposition (a -> b) (c -> d) r where
-    (f ... g) c = f ... g c
-    {-# INLINE (...) #-}
+  (f ... g) c = f ... g c
+  {-# INLINE (...) #-}
