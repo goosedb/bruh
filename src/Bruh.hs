@@ -2,7 +2,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE ImplicitParams #-}
 {-# LANGUAGE LambdaCase #-}
-module Bruh 
+module Bruh
   ( module Bruh
   , Maybe.fromMaybe
   , Maybe.maybe
@@ -20,7 +20,7 @@ module Bruh
 
   , Applicative.Applicative(pure, (<*>), (<*), (*>))
   , Applicative.Alternative(empty, (<|>))
-  
+
   , Monad.Monad ((>>=), (>>))
   , (Monad.>=>)
 
@@ -58,7 +58,7 @@ module Bruh
 
 
   , (Function..)
-  
+
   , Show.Show(show)
 
   , Eq.Eq(..)
@@ -78,7 +78,7 @@ module Bruh
 
   , Enum.Enum
 
-  , Read.Read 
+  , Read.Read
   , Read.readMaybe
   , Read.read
 
@@ -102,7 +102,7 @@ module Bruh
   , IO.putStr
   , IO.print
   , IO.getLine
-  , IO.getChar 
+  , IO.getChar
   , IO.IO
 
   ) where
@@ -124,7 +124,7 @@ import GHC.Enum as Enum
 import GHC.Int as Int
 import GHC.Num as Num
 import GHC.Real as Real
-import GHC.Read as Read 
+import GHC.Read as Read
 import Text.Read as Read
 import Data.Semigroup as Semigroup
 import System.IO as IO
@@ -177,28 +177,39 @@ a <&&> b = a >>= Bool.bool (pure False) b
 while :: Monad m => m Bool -> m ()
 while action = action >>= Bool.bool (pure ()) (while action)
 
-forEach :: (Traversable t, Applicative f) => (a -> f b) -> t a -> f (t b)
-forEach = traverse
+mapEach :: (Traversable t, Monad f) => (a -> f b) -> t a -> f (t b)
+mapEach = mapM
+
+mapEach_ :: (Traversable t, Monad f) => (a -> f b) -> t a -> f ()
+mapEach_ f = void . mapM f
 
 for :: Functor f => f a -> (a -> b) -> f b
-for = flip fmap 
+for = flip fmap
 
-mapEach :: (Traversable t, Applicative f) => t a -> (a -> f b) -> f (t b)
-mapEach list f = traverse f list
+forEach :: (Traversable t, Monad f) => t a -> (a -> f b) -> f (t b)
+forEach = forM
+
+forEach_ :: (Traversable t, Monad f) => t a -> (a -> f b) -> f ()
+forEach_ list = void . forM list
 
 map :: Functor f => (a -> b) -> f a -> f b
-map = fmap 
+map = fmap
 
 is :: Eq a => a -> a -> Bool
 is = (==)
 
-maybeHead :: [a] -> Maybe a
-maybeHead = \case
+safeHead :: [a] -> Maybe a
+safeHead = \case
   (x:_) -> Just x
   _ -> Nothing
 
+safeTail :: [a] -> Maybe [a]
+safeTail = \case
+  (_:xs) -> Just xs
+  _ -> Nothing
+
 identity :: a -> a
-identity = id 
+identity = id
 
 length :: Num b => [a] -> b
 length = genericLength

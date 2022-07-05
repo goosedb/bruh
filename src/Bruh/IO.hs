@@ -17,4 +17,4 @@ module Bruh.IO
   , IO.hGetLine
   ) where
 
-import qualified System.IO as IO
+import System.IO as IO
